@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Workout Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+      .container {
+        max-width: 1000px;
+      }
+    </style>
+  </head>
+  <body>
+<!--    Create the initial buttons-->
+    <div class="container">
+      <h1>Configure Workout</h1>
+      <form role="form" method='POST' action='/'>
+          <div class="form-group">
+              <input type="text" name="week" class="form-control" id="week-box" placeholder="Enter the week..." style="max-width: 300px;">
+          </div>
+          <button type="submit" class="btn btn-primary" name="workout_button" value="Upper Push">Upper Push</button>
+          <button type="submit" class="btn btn-primary" name="workout_button" value="Upper Pull">Upper Pull</button>
+          <button type="submit" class="btn btn-success" name="workout_button" value="Lower Push">Lower Push</button>
+          <button type="submit" class="btn btn-success" name="workout_button" value="Lower Pull">Lower Pull</button>
+      </form>
+      <br>
+      {% for error in errors %}
+        <h4>{{ error }}</h4>
+      {% endfor %}
+    </div>
+<!--    Create a table to be outputted-->
+    <div class="col-lg-5 col-lg-offset-1">
+          {% if exercises %}
+            <br>
+            <div id="exercises">
+              <table class="table table-striped" style="max-width: 1000px;">
+                <thead>
+                  <tr>
+                    <th>Exercise</th>
+                      <th>Type</th>
+                      <th>Sets and Reps</th>
+                  </tr>
+                </thead>
+                {% for exercise in exercises%}
+                  <tr>
+                    <td>{{ exercise['Exercise'] }}</td>
+                      <td>{{ exercise['Type'] }}</td>
+                      <td>{{ exercise['Sets and Reps'] }}</td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          {% endif %}
+        </div>
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
+</html>
