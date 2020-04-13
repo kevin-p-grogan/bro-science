@@ -1,0 +1,333 @@
+squat:
+  push: true
+  upper: false
+  variation:
+    # back squat
+    - name: back
+      rating: 10
+      category: primary
+      free weight:
+        - straight bar
+        - safety squat bar
+        - cambered bar
+        - buffalo bar
+      accomodating resistance:
+        # None indicates that the equipment is optional
+        - None
+        - bands
+        - chains
+      other:
+        - None
+        - box
+    # secondary squat variation
+    - name: front
+      rating: 8
+      category: secondary
+      free weight:
+        - straight bar
+        - cambered bar
+      accomodating resistance:
+        - None
+        - bands
+        - chains
+      other equipment:
+        - None
+        - box
+    - name:
+        - Anderson
+        - Zercher
+        - Hack
+      rating: 8
+      category: secondary
+      free weight: straight bar
+      accomodating resistance:
+        - None
+        - bands
+        - chains
+    # assistance squat variation
+    - name:
+        - plie
+        - Bulgarian split
+        - goblet
+      rating: 6
+      category: assistance
+      free weight:
+        - dumbbell
+        - kettlebell
+      accomodating resistance:
+        - None
+        - bands
+    - name: landmine
+      rating: 7
+      category: assistance
+      free weight: straight bar
+      other equipment:
+        - None
+        - box
+    # accessory
+    - name: Sissy
+      rating: 7
+      category: accessory
+      accomodating resistance:
+        - None
+        - bands
+
+deadlift:
+  push: false
+  upper: false
+  variation:
+    # primary deadlifts
+    - name:
+        - sumo
+        - snatch grip
+      rating: 8
+      category: primary
+      free weight: straight bar
+      accomodating resistance:
+        - bands
+        - chains
+    - name:
+        - deficit
+        - raised
+      rating: 8
+      category: primary
+      free weight: straight bar
+      other equipment:
+        - None
+        - blocks
+        - rack
+    - name: conventional
+      rating: 10
+      category: primary
+      equipment:
+      free weight:
+        - straight bar
+        - trap bar
+      accomodating resistance:
+        - None
+        - bands
+        - chains
+    # secondary deadlifts
+    - name:
+        - Romanian
+        - Dimmel
+      rating: 7
+      category: secondary
+      free weight:
+        straight bar
+      accomodating resistance:
+        - None
+        - bands
+    - name: seated
+      free weight: straight bar
+      other equipment: box
+    # assistance deadlifts
+    - name: landmine
+      rating: 6
+      category: assistance
+      free weight: straight bar
+
+press:
+  push: true
+  upper: true
+  variation:
+    # primary variations
+    - name:
+        - close grip bench
+        - middle grip bench
+        - wide grip bench
+        - floor
+        - bridge
+      rating: 10
+      category: primary
+      free weight:
+        - football bar
+        - straight bar
+        - buffalo bar
+      accomodating resistance:
+        - None
+        - bands
+        - chains
+        - slingshot
+      other equipment:
+        - None
+        - fat gripz
+        - foam
+    # secondary variations
+    - name:
+        - Guillotine bench
+        - Spoto bench
+        - incline bench
+        - shoulder
+        - push
+        - pin
+        - decline
+      rating: 7
+      category: secondary
+      free weight:
+        - football bar
+        - straight bar
+        - buffalo bar
+      other equipment:
+        - None
+        - fat gripz
+    # assistance variations
+    - name:
+        - shoulder
+        - incline
+        - decline
+        - bench
+        - Z
+      rating: 7
+      category: assistance
+      free weight: dumbbell
+      accomodating resistance:
+        - None
+        - bands
+      other equipment:
+        - None
+        - fat gripz
+    - name: JM
+      rating: 5
+      category: assistance
+      free weight: straight bar
+      accomodating resistance:
+        - None
+        - bands
+      other equipment:
+        - None
+        - bands
+    # accessory
+    - name: Bradford
+      rating: 6
+      category: accessory
+      free weight: straight bar
+    - name: Tate
+      rating: 5
+      category: accessory
+      free weight: dumbbell
+      accomodating resistance:
+        - None
+        - bands
+    - name:
+        - shoulder
+        - chest
+      rating: 6
+      other equipment: machine
+
+row:
+  push: false
+  upper: true
+  variation:
+    # primary variations
+    - name:
+        - pronated grip
+        - Pendlay
+        - supinated grip
+      rating: 10
+      category: primary
+      free weight:
+        - straight bar
+        - buffalo bar
+    - name:
+        - None
+        - Pendlay
+      rating: 10
+      category: primary
+      free weight: football bar
+    # secondary variations
+    - name:
+        - pronated grip inverted
+        - supinated grip inverted
+        - neutral grip inverted
+      rating: 7
+      category: secondary
+    - name: seal
+      rating: 7
+      category: secondary
+      free weight:
+        - football bar
+        - straight bar
+        - buffalo bar
+      other equipment:
+    # assistance variations
+    - name: landmine
+      rating: 6
+      category: assistance
+      free weight: straight bar
+    - rating: 7
+      category: assistance
+      free weight: dumbbell
+    - rating: 7
+      category: assistance
+      other equipment: cable
+    - name: chest supported
+      rating: 7
+      category: assistance
+      other equipment: machine
+    # accessory
+    - name: upright
+      rating: 5
+      category: accessory
+      free weight:
+        - straight bar
+        - dumbbell
+
+dip:
+  push: true
+  upper: true
+  variation:
+    - category: secondary
+      rating: 10
+      name:
+        - chest
+        - tricep
+    - category: assistance
+      rating: 5
+      name: bench
+
+up:
+  upper: true
+  rating: 8
+  variation:
+    - category: secondary
+      push: false
+      name:
+        - wide grip pull
+        - middle grip pull
+        - middle grip chin
+        - close grip chin
+    - category: assistance
+        push: true
+        name:
+          - wide grip push
+          - middle grip push
+          - close grip push
+        accomodating resistance:
+          - None
+          - slingshot
+          - bands
+          - chains
+        other equipment:
+          - None
+          - box
+
+hang clean:
+  push: false
+  upper: true
+  rating: 7
+  category: primary
+  free weight: straight bar
+  other equipment:
+    - None
+    - box
+
+snatch grip high pull:
+  push: false
+  upper: true
+  rating: 10
+  category: primary
+  free weight: straight bar
+  other equipment:
+    - None
+    - box

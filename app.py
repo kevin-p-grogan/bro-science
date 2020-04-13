@@ -9,7 +9,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from model import Result
+from model import *
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -19,13 +19,11 @@ def index():
     if request.method == "POST":
         try:
             exercises = generate_workout(request.form['workout_button'], int(request.form['week']))
-            #exercises = [{'Type': 'a', 'Exercise': 'a', 'Sets': 'a', 'Reps': 3}]
         except:
             errors.append(
                 "Unable to produce workout."
             )
     return render_template('index.html', errors=errors, exercises=exercises)
-
 
 
 if __name__ == '__main__':
