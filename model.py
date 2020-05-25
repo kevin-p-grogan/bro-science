@@ -13,8 +13,6 @@ exercise_equipment = db.Table(
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), nullable=False)
-    is_push = db.Column(db.Boolean)  # true if push movement, false if pull movement
-    is_upper_body = db.Column(db.Boolean)  # true if upper body, false if lower body
     rating = db.Column(db.Integer)
 
     # one-to-many relationship
@@ -48,3 +46,6 @@ class Equipment(db.Model):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), nullable=False)
+    is_push = db.Column(db.Boolean)  # exercise is a push movement, o.t.w. pull or conditioning
+    is_upper = db.Column(db.Boolean)  # exercise is an upper body exercise, o.t.w. lower or conditioning
+    is_conditioning = db.Column(db.Boolean)  # conditioning exercise; o.t.w. (push, pull) x (upper, lower)
