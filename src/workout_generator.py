@@ -1,6 +1,6 @@
 import random
 
-from src.excercise_database import create_exercise_database
+#from src.excercise_database import create_exercise_database
 
 
 def generate_workout(workout_type, week):

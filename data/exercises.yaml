@@ -12,12 +12,12 @@ squat:
         - cambered bar
         - buffalo bar
       accomodating resistance:
-        # None indicates that the equipment is optional
-        - None
+        # null indicates that the equipment is optional
+        - null
         - bands
         - chains
-      other:
-        - None
+      other equipment:
+        - null
         - box
     # secondary squat variation
     - name: front
@@ -27,11 +27,11 @@ squat:
         - straight bar
         - cambered bar
       accomodating resistance:
-        - None
+        - null
         - bands
         - chains
       other equipment:
-        - None
+        - null
         - box
     - name:
         - Anderson
@@ -41,7 +41,7 @@ squat:
       category: secondary
       free weight: straight bar
       accomodating resistance:
-        - None
+        - null
         - bands
         - chains
     # assistance squat variation
@@ -55,21 +55,21 @@ squat:
         - dumbbell
         - kettlebell
       accomodating resistance:
-        - None
+        - null
         - bands
     - name: landmine
       rating: 7
       category: assistance
       free weight: straight bar
       other equipment:
-        - None
+        - null
         - box
     # accessory
     - name: Sissy
       rating: 7
       category: accessory
       accomodating resistance:
-        - None
+        - null
         - bands
 
 deadlift:
@@ -93,7 +93,7 @@ deadlift:
       category: primary
       free weight: straight bar
       other equipment:
-        - None
+        - null
         - blocks
         - rack
     - name: conventional
@@ -104,7 +104,7 @@ deadlift:
         - straight bar
         - trap bar
       accomodating resistance:
-        - None
+        - null
         - bands
         - chains
     # secondary deadlifts
@@ -116,7 +116,7 @@ deadlift:
       free weight:
         straight bar
       accomodating resistance:
-        - None
+        - null
         - bands
     - name: seated
       free weight: straight bar
@@ -145,12 +145,12 @@ press:
         - straight bar
         - buffalo bar
       accomodating resistance:
-        - None
+        - null
         - bands
         - chains
         - slingshot
       other equipment:
-        - None
+        - null
         - fat gripz
         - foam
     # secondary variations
@@ -169,7 +169,7 @@ press:
         - straight bar
         - buffalo bar
       other equipment:
-        - None
+        - null
         - fat gripz
     # assistance variations
     - name:
@@ -182,20 +182,20 @@ press:
       category: assistance
       free weight: dumbbell
       accomodating resistance:
-        - None
+        - null
         - bands
       other equipment:
-        - None
+        - null
         - fat gripz
     - name: JM
       rating: 5
       category: assistance
       free weight: straight bar
       accomodating resistance:
-        - None
+        - null
         - bands
       other equipment:
-        - None
+        - null
         - bands
     # accessory
     - name: Bradford
@@ -207,7 +207,7 @@ press:
       category: accessory
       free weight: dumbbell
       accomodating resistance:
-        - None
+        - null
         - bands
     - name:
         - shoulder
@@ -230,7 +230,7 @@ row:
         - straight bar
         - buffalo bar
     - name:
-        - None
+        - null
         - Pendlay
       rating: 10
       category: primary
@@ -298,19 +298,19 @@ up:
         - middle grip chin
         - close grip chin
     - category: assistance
-        push: true
-        name:
-          - wide grip push
-          - middle grip push
-          - close grip push
-        accomodating resistance:
-          - None
-          - slingshot
-          - bands
-          - chains
-        other equipment:
-          - None
-          - box
+      push: true
+      name:
+        - wide grip push
+        - middle grip push
+        - close grip push
+      accomodating resistance:
+        - null
+        - slingshot
+        - bands
+        - chains
+      other equipment:
+        - null
+        - box
 
 hang clean:
   push: false
@@ -319,7 +319,7 @@ hang clean:
   category: primary
   free weight: straight bar
   other equipment:
-    - None
+    - null
     - box
 
 snatch grip high pull:
@@ -329,5 +329,5 @@ snatch grip high pull:
   category: primary
   free weight: straight bar
   other equipment:
-    - None
+    - null
     - box

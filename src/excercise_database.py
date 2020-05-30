@@ -1,7 +1,160 @@
 from itertools import product
 from app import db
+from collections import namedtuple
+from model import Equipment, Exercise, Category
+from copy import deepcopy
+import yaml
+
+EXCERCISE_FILENAME = 'data/exercises.yaml'
+NAME_MAP = {
+    'descriptor': 'name',
+    'name': 'primary_name',
+    'equipment_categories': ['free weight', 'accomodating resistance', 'other equipment'],
+    'rating': 'rating',
+    'push': 'push',
+    'upper': 'upper',
+    'conditioning': 'conditioning'
+}
+DEFAULTS = {
+    'rating': 5,
+    'push': True,
+    'upper': True,
+    'conditioning': False
+}
+
+CategoryTuple = namedtuple('CategoryTuple', ['name', 'push', 'upper', 'conditioning'])
+ExerciseTuple = namedtuple('ExerciseTuple', ['name', 'rating', 'equipment', 'category'])
+EquipmentTuple = namedtuple('EquipmentTuple', ['name'])
 
 
+def _populate_exercises(data, template_exercise, exercises, key):
+    """This function recursively populates exercises taken from the raw YAML file."""
+    exercise = deepcopy(template_exercise)
+
+    if not isinstance(data, dict):
+        exercise[key] = data
+        exercises.append(exercise)
+    else:
+        lists = {}
+        for k, v in data.items():
+            if isinstance(v, list):
+                lists[k] = v
+            else:
+                exercise[k] = v
+
+        if len(lists) == 0:
+            exercises.append(exercise)
+        elif len(lists) == 1:  # if there is only one list, just iterate
+            k, v = list(lists.items())[0]
+            for item in v:
+                _populate_exercises(item, exercise, exercises, k)
+        else:
+            for combo in product(*lists.values()):  # if there are multiple lists, use a product rule to decompress
+                new_data = {k: v for k, v in zip(lists.keys(), combo)}
+                _populate_exercises(new_data, exercise, exercises, key)
+
+
+def decompress_exercises(compressed_exercises):
+    """This function takes the raw exercises taken in a compressed format extracts the individual exercises"""
+    exercises = list()
+
+    for primary_name, data in compressed_exercises.items():
+        exercise = {NAME_MAP['name']: primary_name}
+        _populate_exercises(data, exercise, exercises, primary_name)
+
+    return exercises
+
+
+def create_name(raw_exercise, equipments):
+
+    descriptor = raw_exercise.get(NAME_MAP['descriptor'], None)
+    name = '{} '.format(descriptor) if descriptor is not None else ''
+    name += raw_exercise[NAME_MAP['name']]
+
+    num_equipments = len(equipments)
+    if num_equipments == 1:
+        equipment = equipments.pop()
+        equipments.add(equipment)
+        name += f' with {equipment.name}'
+    elif num_equipments >= 2:
+        name += f' with'
+        for i, equipment in enumerate(equipments):
+            if i == num_equipments - 1:
+                name += f' and {equipment.name}'
+            else:
+                name += f' {equipment.name},'
+
+    return name
+
+
+def get_equipment(raw_exercise):
+    equipment_categories = NAME_MAP['equipment_categories']
+    equipments = set()
+    for idx, equipment_category in enumerate(equipment_categories):
+        equipment = raw_exercise.get(equipment_category, None)
+        if equipment is not None:
+            equipments.add(EquipmentTuple(name=equipment))
+    return equipments
+
+
+def get_category(raw_exercise):
+    push = raw_exercise.get(NAME_MAP['push'], DEFAULTS['push'])
+    upper = raw_exercise.get(NAME_MAP['upper'], DEFAULTS['upper'])
+    conditioning = raw_exercise.get(NAME_MAP['conditioning'], DEFAULTS['conditioning'])
+
+    direction = 'push' if push else 'pull'
+    group = 'upper' if upper else 'lower'
+    if conditioning:
+        return CategoryTuple(name='conditioning', push=False, upper=False, conditioning=conditioning)
+    else:
+        return CategoryTuple(name=f'{group} {direction}', push=push, upper=upper, conditioning=conditioning)
+
+
+def create_database(raw_exercises):
+
+    all_equipments = set()
+    all_categories = set()
+    all_exercises = set()
+
+    # First create the tuples; these allow for the exercises/categories/equipment to be hashed and stored in a set
+    for raw_exercise in raw_exercises:
+        equipments = get_equipment(raw_exercise)
+        name = create_name(raw_exercise, equipments)
+        category = get_category(raw_exercise)
+
+        rating = raw_exercise.get(NAME_MAP['rating'], DEFAULTS['rating'])
+        all_exercises.add(ExerciseTuple(name=name, rating=rating, equipment=tuple(equipments), category=category))
+        all_categories.add(category)
+        all_equipments = all_equipments.union(equipments)
+
+    # Convert the tuples
+    all_equipments = [Equipment(**e._asdict()) for e in all_equipments]
+    all_categories = [Category(**c._asdict()) for c in all_categories]
+    all_exercises = [
+        Exercise(
+            name=ex.name,
+            rating=ex.rating,
+            equipment=[e for et, e in product(ex.equipment, all_equipments) if et.name == e.name],
+            category=next(c for c in all_categories if ex.category.name == c.name)
+        ) for ex in all_exercises
+    ]
+
+    # Create the database
+    db.rollback()
+    db.create_all()
+    for ex in all_exercises:
+        db.session.add(ex)
+    db.session.commit()
+    pass
+
+
+if __name__ == '__main__':
+    with open(EXCERCISE_FILENAME, 'r') as exercise_file:
+        compressed_exercises = yaml.load(exercise_file)
+        raw_exercises = decompress_exercises(compressed_exercises)
+        create_database(raw_exercises)
+
+# from itertools import product
 # def create_exercise_database():
 #     '''gets all the exercises'''
 #     exercises = dict()
