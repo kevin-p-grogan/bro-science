@@ -16,7 +16,15 @@
       <h1>Configure Workout</h1>
       <form role="form" method='POST' action='/'>
           <div class="form-group">
-              <input type="text" name="week" class="form-control" id="week-box" placeholder="Enter the week..." style="max-width: 300px;">
+              <input type="radio" id="Recovery" name="week" value="Recovery">
+              <label for="Recovery">Recovery</label>
+              <input type="radio" id="Hypertrophy" name="week" value="Hypertrophy" checked style="margin:10px">
+              <label for="Hypertrophy">Hypertrophy</label>
+              <input type="radio" id="Strength" name="week" value="Strength" style="margin:10px">
+              <label for="Strength">Strength</label>
+              <input type="radio" id="Test" name="week" value="Test" style="margin:10px">
+              <label for="Test">Test</label>
+              <br>
           </div>
           <button type="submit" class="btn btn-primary" name="workout_button" value="Upper Push">Upper Push</button>
           <button type="submit" class="btn btn-primary" name="workout_button" value="Upper Pull">Upper Pull</button>

@@ -18,7 +18,7 @@ def index():
     exercises = []
     if request.method == "POST":
         try:
-            exercises = generate_workout(request.form['workout_button'], int(request.form['week']))
+            exercises = generate_workout(request.form['workout_button'], request.form['week'])
         except:
             errors.append(
                 "Unable to produce workout."

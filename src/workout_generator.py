@@ -1,4 +1,3 @@
-import random
 import pandas as pd
 import yaml
 from collections import Iterable
@@ -9,7 +8,6 @@ from src.excercise_database import EXCERCISE_DATAFRAME
 FILTERS_FILENAME = 'data/filters.yaml'
 WORKOUTS_FILENAME = 'data/workouts.yaml'
 KEYWORD = 'inherit'
-WEEK_NAMES = ('Recovery', 'Hypertrophy', 'Strength', 'Test')
 
 
 def __deep_merge_dictionaries(a, b, path=None):
@@ -107,7 +105,7 @@ def __convert_to_template(exercises):
 def generate_workout(workout_name, week):
     exercise_dataframe = pd.read_pickle(EXCERCISE_DATAFRAME)
     exercise_dataframe = __apply_filters(exercise_dataframe)
-    full_workout_name = ' '.join((workout_name, WEEK_NAMES[week % len(WEEK_NAMES)]))
+    full_workout_name = ' '.join((workout_name, week))
     workout = __load_workout(full_workout_name)
     exercises = __select_exercises(workout, exercise_dataframe)
     return __convert_to_template(exercises)
