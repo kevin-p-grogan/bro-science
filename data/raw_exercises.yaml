@@ -1,5 +1,10 @@
 # This file is used to create exercises. These are in a compressed format to alleviate additions.
 # exercises.pickle is created from this file.
+
+##########################################
+# Major Exercises Variations
+##########################################
+
 squat:
   push: true
   upper: false
@@ -24,7 +29,7 @@ squat:
         - box
     # secondary squat variation
     - name: front
-      rating: 8
+      rating: 5
       category: secondary
       free weight:
         - straight bar
@@ -40,8 +45,7 @@ squat:
     - name:
         - Anderson
         - Zercher
-        - Hack
-      rating: 8
+      rating: 4
       category: secondary
       free weight: straight bar
       accomodating resistance:
@@ -49,6 +53,14 @@ squat:
         - bands
         - chains
         - buckets
+    - name: Hack
+      rating: 10
+      category: secondary
+      free weight: straight bar
+      accomodating resistance:
+        - null
+        - bands
+        - chains
     # assistance squat variation
     - name:
         - plie
@@ -69,6 +81,12 @@ squat:
       other equipment:
         - null
         - box
+    - name: belt
+      rating: 8
+      category: assistance
+      other equipment:
+        - null
+        - machine
     # accessory
     - name: Sissy
       rating: 7
@@ -131,6 +149,17 @@ deadlift:
       rating: 6
       category: assistance
       free weight: straight bar
+    - name: Romanian
+      rating: 6
+      category: assistance
+      free weight: dumbbell
+      accomodating resistance:
+        - null
+        - bands
+    - name: single leg
+      rating: 5
+      category: assistance
+      free weight: dumbbell
 
 press:
   push: true
@@ -220,6 +249,10 @@ press:
         - chest
       rating: 6
       other equipment: machine
+    - name: leg
+      upper: false
+      rating: 6
+      other equipment: machine
 
 row:
   push: false
@@ -264,7 +297,7 @@ row:
     - rating: 7
       category: assistance
       free weight: dumbbell
-    - rating: 7accessory
+    - rating: 7
       category: assistance
       other equipment: cable
     - name: chest supported
@@ -291,6 +324,9 @@ dip:
     - category: assistance
       rating: 5
       name: bench
+    - name: null
+      category: assistance
+      accomodating resistance: bands
 
 up:
   upper: true
@@ -303,6 +339,14 @@ up:
         - middle grip pull
         - middle grip chin
         - close grip chin
+    - category: assistance
+      push: false
+      name:
+        - pull
+        - chin
+      accomodating resistance:
+        - bands
+        - box
     - category: assistance
       push: true
       name:
@@ -317,6 +361,11 @@ up:
       other equipment:
         - null
         - box
+    - name: step
+      upper: false
+      push: true
+      other equipment: box
+      rating: 7
 
 hang clean:
   push: false
@@ -338,7 +387,290 @@ snatch grip high pull:
     - null
     - box
 
+curl:
+  push: false
+  upper: true
+  rating: 8
+  category: accessory
+  free weight: dumbbell
+  accomodating resistance:
+    - null
+    - bands
+  variation:
+    - name: hammer
+    - name: null
+      free weight: straight bar
+    - name: pinwheel
+    - name: preacher
+    - name: isolation
+
+##########################################
+# Additional Lower
+##########################################
+good mornings:
+  push: false
+  upper: false
+  rating: 3
+  category: assistance
+  free weight:
+    - safety squat bar
+    - cambered bar
+    - buffalo bar
+  accomodating resistance:
+    - bands
+    - chains
+    - null
+  other equipment:
+    - null
+    - box
+
+back raises:
+  push: false
+  upper: false
+  rating: 5
+  category: assistance
+  free weight:
+    - straight bar
+    - dumbbell
+    - null
+  accomodating resistance:
+    - null
+    - bands
+    - chains
+  variation:
+    - name: 45 degree
+      rating: 8
+    - name: 90 degree
+    - name: reverse
+    - name: glute-ham
+
+glute ham raises:
+  push: false
+  upper: false
+  rating: 7
+  category: assistance
+  accomodating resistance:
+    - null
+    - bands
+
+calf raises:
+  push: true
+  upper: false
+  rating: 7
+  category: accessory
+  free weight:
+    - dumbbell
+    - straight bar
+
+hip abductor:
+  push: true
+  upper: false
+  rating: 9
+  category: accessory
+  variation:
+    - name: null
+      other equipment: machine
+    - name: null
+      accomodating resistance: bands
+
+x walks:
+  push: true
+  upper: false
+  rating: 9
+  category: accessory
+  accomodating resistance: bands
+
+
+##########################################
+# Additional Upper
+##########################################
+
+pullover:
+  push: false
+  upper: true
+  rating: 10
+  category: accessory
+  free weight: dumbbell
+  accomodating resistance:
+    - bands
+    - null
+
+face pull:
+  push: false
+  upper: true
+  rating: 8
+  category: accessory
+  accomodating resistance: bands
+
+pulldowns:
+  push: false
+  upper: true
+  rating: 5
+  variation:
+    - name: null
+      accommodating resistance: bands
+    - name: lat
+      other equipment: machine
+
+fly:
+  push: true
+  upper: true
+  rating: 6
+  free weight: dumbbell
+  accomodating resistance:
+    - null
+    - bands
+
+raises:
+  push: true
+  upper: true
+  rating: 5
+  free weight: dumbbell
+  category: accessory
+  variation:
+    - name: front
+      free weight:
+        - dumbbell
+        - straight bar
+    - name: lateral
+      category: assistance
+      rating: 8
+    - name: IYT
+    - name: v
+      accomodating resistance:
+        - null
+        - bands
+
+tricep extensions:
+  push: true
+  upper: true
+  rating: 5
+  free weight: dumbbell
+  category: accessory
+  variation:
+    - name: null
+      accomodating resistance: bands
+    - name: null
+      other equipment: cable
+    - name: rolling
+    - name: overhead
+      free weight:
+        - straight bar
+        - dumbbell
+      accomodating resistance:
+        - bands
+        - null
+
+tricep kickbacks:
+  push: true
+  upper: true
+  rating: 7
+  free weight: dumbbell
+  category: accessory
+
+skull crushers:
+  push: true
+  upper: true
+  rating: 7
+  free weight: straight bar
+  category: accessory
+
+##########################################
+# Conditioning
+##########################################
+
 ab rollers:
   conditioning: true
   rating: 10
   category: conditioning
+
+hanging knee raises:
+  conditioning: true
+  rating: 7
+  category: conditioning
+
+Russian twists:
+  conditioning: true
+  rating: 5
+  category: conditioning
+
+scissor kicks:
+  conditioning: true
+  rating: 5
+  category: conditioning
+
+planks:
+  conditioning: true
+  rating: 3
+  category: conditioning
+  variation:
+    - name: side
+    - name: Chinese
+    - name: standard
+
+side bends:
+  conditioning: true
+  rating: 5
+  category: conditioning
+
+around the worlds:
+  conditioning: true
+  rating: 5
+  category: conditioning
+
+weighted reverse crunch:
+  conditioning: true
+  rating: 10
+  category: conditioning
+
+situps:
+  conditioning: true
+  category: conditioning
+  variation:
+    - name: v
+      rating: 8
+    - name: spread eagle
+      rating: 5
+    - name: Roman chair
+      rating: 8
+
+mountain climbers:
+  conditioning: true
+  category: conditioning
+  rating: 6
+
+farmers walks:
+  conditioning: true
+  category: conditioning
+  rating: 6
+  free weight: dumbbell
+
+sled push:
+  conditioning: true
+  category: conditioning
+  rating: 8
+  other equipment: sled
+
+snatch:
+  conditioning: true
+  category: conditioning
+  rating: 8
+  free weight: dumbbell
+
+suitcase carries:
+  conditioning: true
+  category: conditioning
+  rating: 3
+  free weight: dumbbell
+
+landmine squat and press:
+  conditioning: true
+  category: conditioning
+  rating: 6
+  free weight: straight bar
+
+swings:
+  conditioning: true
+  category: conditioning
+  rating: 10
+  free weight: kettlebell
