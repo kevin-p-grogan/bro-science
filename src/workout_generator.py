@@ -1,112 +1,113 @@
 import random
+import pandas as pd
+import yaml
+from collections import Iterable
+from copy import deepcopy
 
-#from src.excercise_database import create_exercise_database
+from src.excercise_database import EXCERCISE_DATAFRAME
 
-
-def generate_workout(workout_type, week):
-    exercise_database = create_exercise_database()
-    week = (week-1) % 4 + 1
-    exercises = list()
-
-    if workout_type in ["Upper Push", "Upper Pull", "Lower Push", "Lower Pull"]:
-        group, primary_direction = workout_type.lower().split()
-        secondary_direction = "push" if primary_direction == "pull" else "pull"
-        exercises.append({
-            'Type': 'Primary',
-            'Exercise': select_exercise(exercise_database, 'primary', group, primary_direction, week),
-            'Sets and Reps': get_sets_and_reps('primary', group, primary_direction, week)
-        })
-        exercises.append({
-            'Type': 'Secondary',
-            'Exercise': select_exercise(exercise_database, 'secondary', group, secondary_direction, week),
-            'Sets and Reps': get_sets_and_reps('secondary', group, secondary_direction, week)
-        })
-        exercises.append({
-            'Type': 'Circuit',
-            'Exercise': select_exercise(exercise_database, 'assistance', group, primary_direction, week),
-            'Sets and Reps': get_sets_and_reps('assistance', group, primary_direction, week)
-        })
-        exercises.append({
-            'Type': 'Circuit',
-            'Exercise': select_exercise(exercise_database, 'assistance', group, secondary_direction, week),
-            'Sets and Reps': get_sets_and_reps('assistance', group, secondary_direction, week)
-        })
-        exercises.append({
-            'Type': 'Circuit',
-            'Exercise': select_exercise(exercise_database, 'core', 'core', 'core', week),
-            'Sets and Reps': get_sets_and_reps('assistance', 'core', 'core', week)
-        })
-        exercises.append({
-            'Type': 'Burner',
-            'Exercise': select_exercise(exercise_database, 'accessory', group, primary_direction, week),
-            'Sets and Reps': get_sets_and_reps('accessory', group, primary_direction, week)
-        })
-        exercises.append({
-            'Type': 'Burner',
-            'Exercise': select_exercise(exercise_database, 'accessory', group, secondary_direction, week),
-            'Sets and Reps': get_sets_and_reps('accessory', group, secondary_direction, week)
-        })
-
-    return exercises
+FILTERS_FILENAME = 'data/filters.yaml'
+WORKOUTS_FILENAME = 'data/workouts.yaml'
+KEYWORD = 'inherit'
+WEEK_NAMES = ('Recovery', 'Hypertrophy', 'Strength', 'Test')
 
 
-def select_exercise(exercises, category, group, direction, week):
-        exercise_priorities = {ex: exercises[ex]['priority'] *
-                                 (10 if (ex.split(' ')[-1] == 'bands') and\
-                                         (week == 1) and
-                                         (category ==' primary')\
-                                         else 1)
-                              for ex in exercises
-                              if (exercises[ex]['category'] == category) and
-                                 (exercises[ex]['group'] == group) and
-                                 (exercises[ex]['direction'] == direction)}
-        weighted_list = []
-        for ex in exercise_priorities: weighted_list += exercise_priorities[ex]*[ex]
-        selected_exercise = random.choice(weighted_list)
-        del exercises[selected_exercise]
-        return selected_exercise
+def __deep_merge_dictionaries(a, b, path=None):
+    "merges b into a. Adapted from https://stackoverflow.com/questions/7204805/how-to-merge-dictionaries-of-dictionaries/7205107#7205107 "
 
+    if path is None:
+        path = []
 
-def get_sets_and_reps(category, group, direction, week):
-    if category == 'primary':
-        if group =='lower' and direction == 'pull':
-            if week == 1:
-                sets = "10"
-                reps = "1"
-            elif week == 2:
-                sets = "1"
-                reps = "5"
-            elif week == 3:
-                sets = "1"
-                reps = "3"
+    for key in b:
+        if key in a:
+            if isinstance(a[key], dict) and isinstance(b[key], dict):
+                __deep_merge_dictionaries(a[key], b[key], path + [str(key)])
             else:
-                sets = "1x"
-                reps = "1"
-
+                a[key] = b[key]
         else:
-            if week == 1:
-                sets = "8"
-                reps = "3"
-            elif week == 2:
-                sets = "3"
-                reps = "5"
-            elif week == 3:
-                sets = "3"
-                reps = "3"
-            else:
-                sets = "1"
-                reps = "1"
+            a[key] = b[key]
 
-    elif category == 'secondary':
-        sets = '4'
-        reps = '6-10'
+    return a
 
-    elif category == 'accessory':
-        sets = '1'
-        reps = '40-60'
 
-    else:
-        sets = '3'
-        reps = '8-15'
+def __resolve_inheritance(workouts, root):
+    if not isinstance(workouts, dict):
+        return
 
-    return f"{sets}x{reps}"
+    merged_workouts = workouts
+    for k, v in workouts.items():
+        __resolve_inheritance(v, root)
+        if k == KEYWORD:
+            inherited = deepcopy(root[workouts[k]])
+            merged_workouts = __deep_merge_dictionaries(inherited, workouts)
+
+    for k, v in merged_workouts.items():
+        if k == KEYWORD:
+            del workouts[k]
+        else:
+            workouts[k] = v
+
+
+def __load_workout(workout_name):
+    # load the raw workout
+    with open(WORKOUTS_FILENAME, 'r') as workouts_file:
+        workouts = yaml.load(workouts_file)
+        __resolve_inheritance(workouts, workouts)
+        return workouts[workout_name]
+
+
+def __apply_filters(df):
+    df = df.copy()
+    with open(FILTERS_FILENAME, 'r') as filters_file:
+        filters = yaml.load(filters_file)
+
+        for column, value in filters.items():
+            if column in df.columns:
+                if not isinstance(value, Iterable):
+                    values = [value]
+                else:
+                    values = value
+
+                keep = df[column].map(
+                    lambda v: v in values if not isinstance(v, Iterable) else all(vi in values for vi in v)
+                )
+                df = df[keep]
+
+    return df
+
+
+def __select_exercises(workout, exercise_dataframe):
+    dfs = []
+    for exercise in workout:
+        df = exercise_dataframe.copy()
+        for column in (c for c in workout[exercise] if c in df.columns and workout[exercise][c] is not None):
+            df = df[df[column] == workout[exercise][column]]
+        df = df.sample(n=1, weights=df.rating)
+        df['type'] = exercise
+        df['sets_and_reps'] = workout[exercise]['sets and reps']
+        df['order'] = workout[exercise]['order']
+        dfs.append(df)
+
+    df = pd.concat(dfs)
+    return df.sort_values(by='order')
+
+
+def __convert_to_template(exercises):
+    template = []
+    for _, row in exercises.iterrows():
+        template.append({
+            'Exercise': row['name'],
+            'Type': row.type,
+            'Sets and Reps': row.sets_and_reps
+        })
+
+    return template
+
+
+def generate_workout(workout_name, week):
+    exercise_dataframe = pd.read_pickle(EXCERCISE_DATAFRAME)
+    exercise_dataframe = __apply_filters(exercise_dataframe)
+    full_workout_name = ' '.join((workout_name, WEEK_NAMES[week % len(WEEK_NAMES)]))
+    workout = __load_workout(full_workout_name)
+    exercises = __select_exercises(workout, exercise_dataframe)
+    return __convert_to_template(exercises)

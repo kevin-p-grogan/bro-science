@@ -1,0 +1,12 @@
+# This file is used to filter exercises in the saved dataframe. The logic is inclusive.
+equipment:
+  - straight bar
+  - bands
+  - box
+  - buckets
+  - kettlebell
+  - blocks
+  - rack
+  - slingshot
+  - fat gripz
+  - dumbbell

@@ -17,13 +17,12 @@ def index():
     errors = []
     exercises = []
     if request.method == "POST":
-        # try:
-        #     exercises = generate_workout(request.form['workout_button'], int(request.form['week']))
-        # except:
-        #     errors.append(
-        #         "Unable to produce workout."
-        #     )
-        pass
+        try:
+            exercises = generate_workout(request.form['workout_button'], int(request.form['week']))
+        except:
+            errors.append(
+                "Unable to produce workout."
+            )
     return render_template('index.html', errors=errors, exercises=exercises)
 
 

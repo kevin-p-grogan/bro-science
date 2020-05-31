@@ -1,0 +1,178 @@
+# This file defines templates for workout days
+
+# Workout categories
+Primary:
+  category: primary
+  sets and reps: 5x5
+  direction_and_group: upper push
+  order: 0
+
+Secondary:
+  category: secondary
+  sets and reps: 8x3
+  direction_and_group: upper pull
+  order: 1
+
+Circuit:
+  category: assistance
+  sets and reps: 3x12
+  direction_and_group: upper push
+
+Burner:
+  category: accessory
+  sets and reps: 1x40
+  direction_and_group: upper push
+
+Upper Push:
+  # Define the set of exercises
+  Primary:
+    inherit: Primary  # inherits data from the base key but is overwritten if there is a conflict
+  Secondary:
+    inherit: Secondary
+  Circuit A:
+    inherit: Circuit
+    order: 2
+  Circuit B:
+    inherit: Circuit
+    direction_and_group: upper pull
+    order: 3
+  Circuit C:
+    inherit: Circuit
+    category: conditioning
+    direction_and_group: null
+    order: 4
+  Burner A:
+    inherit: Burner
+    order: 5
+  Burner B:
+    inherit: Burner
+    direction_and_group: upper pull
+    order: 6
+
+Upper Pull:
+  inherit: Upper Push
+  Primary:
+    direction_and_group: upper pull
+  Secondary:
+    direction_and_group: upper push
+
+Lower Push:
+  inherit: Upper Push
+  Primary:
+    direction_and_group: lower push
+  Secondary:
+    direction_and_group: lower pull
+  Circuit A:
+    direction_and_group: lower push
+  Circuit B:
+    direction_and_group: lower pull
+  Burner A:
+    direction_and_group: lower push
+  Burner B:
+    direction_and_group: lower pull
+
+Lower Pull:
+  inherit: Lower Push
+  Primary:
+    direction_and_group: lower pull
+    sets and reps: 1x5
+  Secondary:
+    direction_and_group: lower push
+
+# Fine-grained workouts
+Upper Push Recovery:
+  inherit: Upper Push
+  Primary:
+    sets and reps: 12x2
+  Secondary:
+    sets and reps: 8x3
+
+Upper Push Hypertrophy:
+  inherit: Upper Push
+
+Upper Push Strength:
+  inherit: Upper Push
+  Primary:
+    sets and reps: 3x3
+  Secondary:
+    sets and reps: 4x6
+
+Upper Push Test:
+  inherit: Upper Push
+  Primary:
+    sets and reps: 1x1
+  Secondary:
+    sets and reps: 3x3
+
+Upper Pull Recovery:
+  inherit: Upper Pull
+  Primary:
+    sets and reps: 12x2
+  Secondary:
+    sets and reps: 8x3
+
+Upper Pull Hypertrophy:
+  inherit: Upper Pull
+
+Upper Pull Strength:
+  inherit: Upper Pull
+  Primary:
+    sets and reps: 3x3
+  Secondary:
+    sets and reps: 4x6
+
+Upper Pull Test:
+  inherit: Upper Pull
+  Primary:
+    sets and reps: 1x1
+  Secondary:
+    sets and reps: 3x3
+
+Lower Push Recovery:
+  inherit: Lower Push
+  Primary:
+    sets and reps: 12x2
+  Secondary:
+    sets and reps: 8x3
+
+Lower Push Hypertrophy:
+  inherit: Lower Push
+
+Lower Push Strength:
+  inherit: Lower Push
+  Primary:
+    sets and reps: 3x3
+  Secondary:
+    sets and reps: 4x6
+
+Lower Push Test:
+  inherit: Lower Push
+  Primary:
+    sets and reps: 1x1
+  Secondary:
+    sets and reps: 3x3
+
+Lower Pull Recovery:
+  inherit: Lower Pull
+  Primary:
+    sets and reps: 12x1
+  Secondary:
+    sets and reps: 8x3
+
+Lower Pull Hypertrophy:
+  inherit: Lower Pull
+
+Lower Pull Strength:
+  inherit: Lower Pull
+  Primary:
+    sets and reps: 1x3
+  Secondary:
+    sets and reps: 4x6
+
+Lower Pull Test:
+  inherit: Lower Pull
+  Primary:
+    sets and reps: 1x1
+  Secondary:
+    sets and reps: 3x3
+

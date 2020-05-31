@@ -1,3 +1,5 @@
+# This file is used to create exercises. These are in a compressed format to alleviate additions.
+# exercises.pickle is created from this file.
 squat:
   push: true
   upper: false
@@ -16,6 +18,7 @@ squat:
         - null
         - bands
         - chains
+        - buckets
       other equipment:
         - null
         - box
@@ -30,6 +33,7 @@ squat:
         - null
         - bands
         - chains
+        - buckets
       other equipment:
         - null
         - box
@@ -44,6 +48,7 @@ squat:
         - null
         - bands
         - chains
+        - buckets
     # assistance squat variation
     - name:
         - plie
@@ -149,6 +154,7 @@ press:
         - bands
         - chains
         - slingshot
+        - buckets
       other equipment:
         - null
         - fat gripz
@@ -258,7 +264,7 @@ row:
     - rating: 7
       category: assistance
       free weight: dumbbell
-    - rating: 7
+    - rating: 7accessory
       category: assistance
       other equipment: cable
     - name: chest supported
@@ -331,3 +337,8 @@ snatch grip high pull:
   other equipment:
     - null
     - box
+
+ab rollers:
+  conditioning: true
+  rating: 10
+  category: conditioning
