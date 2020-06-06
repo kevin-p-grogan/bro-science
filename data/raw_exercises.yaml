@@ -27,6 +27,20 @@ squat:
       other equipment:
         - null
         - box
+    - name: Olympic
+      rating: 10
+      category: primary
+      free weight:
+        - straight bar
+      accomodating resistance:
+        # null indicates that the equipment is optional
+        - null
+        - bands
+        - chains
+        - buckets
+      other equipment:
+        - null
+        - box
     # secondary squat variation
     - name: front
       rating: 5
@@ -42,10 +56,19 @@ squat:
       other equipment:
         - null
         - box
-    - name:
-        - Anderson
-        - Zercher
+    - name: Anderson
       rating: 4
+      category: secondary
+      free weight: straight bar
+      accomodating resistance:
+        - null
+        - bands
+        - chains
+        - buckets
+      other equipment:
+        - rack
+    - name: Zercher
+      rating: 6
       category: secondary
       free weight: straight bar
       accomodating resistance:
@@ -142,6 +165,7 @@ deadlift:
         - null
         - bands
     - name: seated
+      category: secondary
       free weight: straight bar
       other equipment: box
     # assistance deadlifts
@@ -312,6 +336,18 @@ row:
         - straight bar
         - dumbbell
 
+hip thrust:
+  push: false
+  upper: false
+  rating: 10
+  category: secondary
+  free weight: straight bar
+  variation:
+    - name: null
+      accomodating resistance:
+        - null
+        - bands
+
 dip:
   push: true
   upper: true
@@ -365,6 +401,7 @@ up:
       upper: false
       push: true
       other equipment: box
+      category: accessory
       rating: 7
 
 hang clean:
@@ -480,6 +517,41 @@ x walks:
   category: accessory
   accomodating resistance: bands
 
+swings:
+  push: false
+  upper: false
+  category: accessory
+  rating: 10
+  free weight: kettlebell
+
+pull through:
+  push: false
+  upper: false
+  category: accessory
+  rating: 8
+  accomodating resistance: bands
+
+glute bridge:
+  push: false
+  upper: false
+  category: accessory
+  rating: 6
+  variation:
+    - name: two-legged
+    - name: one-legged
+    - name: bench elevated
+
+leg curl:
+  push: false
+  upper: false
+  category: accessory
+  rating: 6
+  variation:
+    - name: null
+      free weight: dumbbell
+    - name: null
+      accomodating resistance: bands
+    - name: Nordic
 
 ##########################################
 # Additional Upper
@@ -668,9 +740,3 @@ landmine squat and press:
   category: conditioning
   rating: 6
   free weight: straight bar
-
-swings:
-  conditioning: true
-  category: conditioning
-  rating: 10
-  free weight: kettlebell
