@@ -219,7 +219,6 @@ press:
         - incline bench
         - shoulder
         - push
-        - pin
         - decline
       rating: 7
       category: secondary
@@ -489,6 +488,8 @@ glute ham raises:
   accomodating resistance:
     - null
     - bands
+  other equipment:
+    - GHR
 
 calf raises:
   push: true
