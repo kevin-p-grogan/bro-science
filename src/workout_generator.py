@@ -2,6 +2,7 @@ import pandas as pd
 import yaml
 from collections import Iterable
 from copy import deepcopy
+from datetime import datetime
 
 from src.excercise_database import EXCERCISE_DATAFRAME
 
@@ -80,7 +81,9 @@ def __select_exercises(workout, exercise_dataframe):
         df = exercise_dataframe.copy()
         for column in (c for c in workout[exercise] if c in df.columns and workout[exercise][c] is not None):
             df = df[df[column] == workout[exercise][column]]
-        df = df.sample(n=1, weights=df.rating)
+
+        seed = datetime.now().microsecond
+        df = df.sample(n=1, weights=df.rating, random_state=seed)
         df['type'] = exercise
         df['sets_and_reps'] = workout[exercise]['sets and reps']
         df['order'] = workout[exercise]['order']
