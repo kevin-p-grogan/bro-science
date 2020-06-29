@@ -49,13 +49,16 @@
                       <th>Sets and Reps</th>
                   </tr>
                 </thead>
+                  <form role="form" method='POST' action='/resample'>
                 {% for exercise in exercises%}
                   <tr>
                     <td>{{ exercise['Exercise'] }}</td>
                       <td>{{ exercise['Type'] }}</td>
                       <td>{{ exercise['Sets and Reps'] }}</td>
+                      <td><button class="resample" name="resample_button" value="{{exercise['Exercise']}}">Resample</button></td>
                   </tr>
                 {% endfor %}
+                  </form>
               </table>
             </div>
           {% endif %}

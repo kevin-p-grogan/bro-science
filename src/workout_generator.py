@@ -3,13 +3,14 @@ import yaml
 from collections import Iterable
 from copy import deepcopy
 from datetime import datetime
+import pickle as pkl
 
 from src.excercise_database import EXCERCISE_DATAFRAME
 
 FILTERS_FILENAME = 'data/filters.yaml'
 WORKOUTS_FILENAME = 'data/workouts.yaml'
 KEYWORD = 'inherit'
-
+EXERCISE_CACHE = 'data/exercise_tmp.pkl'
 
 def __deep_merge_dictionaries(a, b, path=None):
     "merges b into a. Adapted from https://stackoverflow.com/questions/7204805/how-to-merge-dictionaries-of-dictionaries/7205107#7205107 "
@@ -105,10 +106,45 @@ def __convert_to_template(exercises):
     return template
 
 
+#TODO: Change how the tracking of exercises is handled. This is not scalable to more than one user.
+def __load_exercises():
+    """Load the temporary file of exercises"""
+    with open(EXERCISE_CACHE, 'rb') as f:
+        exercises = pkl.load(f)
+
+    return exercises
+
+
+def __save_exercises(exercises):
+    """Save exercises out to temporary file"""
+    with open(EXERCISE_CACHE, 'wb') as f:
+        pkl.dump(exercises, f)
+
+
+def resample_exercise(exercise):
+    exercises = __load_exercises()
+    exercise_dataframe = pd.read_pickle(EXCERCISE_DATAFRAME)
+    exercise_dataframe = __apply_filters(exercise_dataframe)
+
+    old_exercise = exercise_dataframe[exercise_dataframe.name == exercise]
+    direction_and_group = old_exercise.direction_and_group.iloc[0]
+    category = old_exercise.category.iloc[0]
+    df = exercise_dataframe[
+        (exercise_dataframe.category == category) & (exercise_dataframe.direction_and_group == direction_and_group)
+    ]
+
+    new_exercise = df.sample(n=1, weights=df.rating, random_state=datetime.now().microsecond).name.iloc[0]
+    exercises.name[exercises.name == exercise] = new_exercise
+
+    __save_exercises(exercises)
+    return __convert_to_template(exercises)
+
+
 def generate_workout(workout_name, week):
     exercise_dataframe = pd.read_pickle(EXCERCISE_DATAFRAME)
     exercise_dataframe = __apply_filters(exercise_dataframe)
     full_workout_name = ' '.join((workout_name, week))
     workout = __load_workout(full_workout_name)
     exercises = __select_exercises(workout, exercise_dataframe)
+    __save_exercises(exercises)
     return __convert_to_template(exercises)
