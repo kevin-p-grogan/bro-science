@@ -12,6 +12,7 @@ WORKOUTS_FILENAME = 'data/workouts.yaml'
 KEYWORD = 'inherit'
 EXERCISE_CACHE = 'data/exercise_tmp.pkl'
 
+
 def __deep_merge_dictionaries(a, b, path=None):
     "merges b into a. Adapted from https://stackoverflow.com/questions/7204805/how-to-merge-dictionaries-of-dictionaries/7205107#7205107 "
 
