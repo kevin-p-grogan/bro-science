@@ -124,7 +124,7 @@ def __save_exercises(exercises):
 
 def resample_exercise(exercise):
     exercises = __load_exercises()
-    exercise_dataframe = pd.read_pickle(EXCERCISE_DATAFRAME)
+    exercise_dataframe = pd.read_json(EXCERCISE_DATAFRAME).transpose()
     exercise_dataframe = __apply_filters(exercise_dataframe)
 
     old_exercise = exercise_dataframe[exercise_dataframe.name == exercise]
@@ -142,7 +142,7 @@ def resample_exercise(exercise):
 
 
 def generate_workout(workout_name, week):
-    exercise_dataframe = pd.read_pickle(EXCERCISE_DATAFRAME)
+    exercise_dataframe = pd.read_json(EXCERCISE_DATAFRAME).transpose()
     exercise_dataframe = __apply_filters(exercise_dataframe)
     full_workout_name = ' '.join((workout_name, week))
     workout = __load_workout(full_workout_name)

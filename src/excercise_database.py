@@ -5,7 +5,7 @@ from copy import deepcopy
 import yaml
 
 RAW_EXCERCISE_FILENAME = 'data/raw_exercises.yaml'
-EXCERCISE_DATAFRAME = 'data/exercises.pickle'
+EXCERCISE_DATAFRAME = 'data/exercises.json'
 
 NAME_MAP = {
     'descriptor': 'name',
@@ -140,4 +140,4 @@ if __name__ == '__main__':
         compressed_exercises = yaml.load(exercise_file)
         raw_exercises = decompress_exercises(compressed_exercises)
         df = create_dataframe(raw_exercises)
-        df.to_pickle(EXCERCISE_DATAFRAME)
+        df.to_json(EXCERCISE_DATAFRAME, orient="index", indent=5)
