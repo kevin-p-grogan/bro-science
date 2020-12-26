@@ -4,13 +4,22 @@ from collections import Iterable
 from copy import deepcopy
 from datetime import datetime
 import pickle as pkl
+import json
 
 from src.excercise_database import EXCERCISE_DATAFRAME
 
 FILTERS_FILENAME = 'data/filters.yaml'
-WORKOUTS_FILENAME = 'data/workouts.yaml'
-KEYWORD = 'inherit'
+WORKOUTS_FILENAME = 'data/raw_workouts.yaml'
+FULL_WORKOUTS_JSON = 'data/workouts.json'
 EXERCISE_CACHE = 'data/exercise_tmp.pkl'
+
+INHERITANCE_KEYWORD = 'inherit'
+COMPLETE_WORKOUT_KEYWORD = 'Complete'
+
+def create_workouts_json(filename):
+    workouts = load_workouts()
+    with open(filename, 'w') as f:
+        json.dump(workouts, f, indent=5)
 
 
 def __deep_merge_dictionaries(a, b, path=None):
@@ -38,12 +47,12 @@ def __resolve_inheritance(workouts, root):
     merged_workouts = workouts
     for k, v in workouts.items():
         __resolve_inheritance(v, root)
-        if k == KEYWORD:
+        if k == INHERITANCE_KEYWORD:
             inherited = deepcopy(root[workouts[k]])
             merged_workouts = __deep_merge_dictionaries(inherited, workouts)
 
     for k, v in merged_workouts.items():
-        if k == KEYWORD:
+        if k == INHERITANCE_KEYWORD:
             del workouts[k]
         else:
             workouts[k] = v
@@ -51,10 +60,26 @@ def __resolve_inheritance(workouts, root):
 
 def __load_workout(workout_name):
     # load the raw workout
+    workouts = load_workouts()
+    return workouts[workout_name]
+
+
+def load_workouts():
     with open(WORKOUTS_FILENAME, 'r') as workouts_file:
         workouts = yaml.load(workouts_file)
         __resolve_inheritance(workouts, workouts)
-        return workouts[workout_name]
+        workouts = __filter_partial_workouts(workouts)
+    return workouts
+
+
+def __filter_partial_workouts(workouts):
+    filtered_workouts = dict()
+    for k, v in workouts.items():
+        if v.get(COMPLETE_WORKOUT_KEYWORD, False):
+            del v[COMPLETE_WORKOUT_KEYWORD]
+            filtered_workouts[k] = v
+
+    return filtered_workouts
 
 
 def __apply_filters(df):
@@ -149,3 +174,9 @@ def generate_workout(workout_name, week):
     exercises = __select_exercises(workout, exercise_dataframe)
     __save_exercises(exercises)
     return __convert_to_template(exercises)
+
+if __name__ == "__main__":
+    #  Generate and save the workout.
+    create_workouts_json(FULL_WORKOUTS_JSON)
+
+

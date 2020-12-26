@@ -86,9 +86,11 @@ Upper Push Recovery:
     sets and reps: 12x2
   Secondary:
     sets and reps: 8x3
+  Complete: true  # indicates that this is the final defined workout rather than a template
 
 Upper Push Hypertrophy:
   inherit: Upper Push
+  Complete: true
 
 Upper Push Strength:
   inherit: Upper Push
@@ -96,6 +98,7 @@ Upper Push Strength:
     sets and reps: 3x3
   Secondary:
     sets and reps: 4x6
+  Complete: true
 
 Upper Push Test:
   inherit: Upper Push
@@ -103,6 +106,7 @@ Upper Push Test:
     sets and reps: 1x1
   Secondary:
     sets and reps: 3x3
+  Complete: true
 
 Upper Pull Recovery:
   inherit: Upper Pull
@@ -110,9 +114,11 @@ Upper Pull Recovery:
     sets and reps: 12x2
   Secondary:
     sets and reps: 8x3
+  Complete: true
 
 Upper Pull Hypertrophy:
   inherit: Upper Pull
+  Complete: true
 
 Upper Pull Strength:
   inherit: Upper Pull
@@ -120,6 +126,7 @@ Upper Pull Strength:
     sets and reps: 3x3
   Secondary:
     sets and reps: 4x6
+  Complete: true
 
 Upper Pull Test:
   inherit: Upper Pull
@@ -127,6 +134,7 @@ Upper Pull Test:
     sets and reps: 1x1
   Secondary:
     sets and reps: 3x3
+  Complete: true
 
 Lower Push Recovery:
   inherit: Lower Push
@@ -134,9 +142,11 @@ Lower Push Recovery:
     sets and reps: 12x2
   Secondary:
     sets and reps: 8x3
+  Complete: true
 
 Lower Push Hypertrophy:
   inherit: Lower Push
+  Complete: true
 
 Lower Push Strength:
   inherit: Lower Push
@@ -144,6 +154,7 @@ Lower Push Strength:
     sets and reps: 3x3
   Secondary:
     sets and reps: 4x6
+  Complete: true
 
 Lower Push Test:
   inherit: Lower Push
@@ -151,6 +162,7 @@ Lower Push Test:
     sets and reps: 1x1
   Secondary:
     sets and reps: 3x3
+  Complete: true
 
 Lower Pull Recovery:
   inherit: Lower Pull
@@ -158,9 +170,11 @@ Lower Pull Recovery:
     sets and reps: 12x1
   Secondary:
     sets and reps: 8x3
+  Complete: true
 
 Lower Pull Hypertrophy:
   inherit: Lower Pull
+  Complete: true
 
 Lower Pull Strength:
   inherit: Lower Pull
@@ -168,6 +182,7 @@ Lower Pull Strength:
     sets and reps: 1x3
   Secondary:
     sets and reps: 4x6
+  Complete: true
 
 Lower Pull Test:
   inherit: Lower Pull
@@ -175,4 +190,5 @@ Lower Pull Test:
     sets and reps: 1x1
   Secondary:
     sets and reps: 3x3
+  Complete: true
 
