@@ -423,22 +423,64 @@ snatch grip high pull:
     - null
     - box
 
+#curl:
+#  push: false
+#  upper: true
+#  rating: 8
+#  category: accessory
+#  free weight:
+#    - dumbbell
+#    - straight bar
+#    - EZ bar
+#  accomodating resistance:
+#    - null
+#    - bands
+#  variation:
+#    - name: hammer
+#    - name: pinwheel
+#    - name: preacher
+#    - name: isolation
+#    - name: arm blaster
 curl:
   push: false
   upper: true
   rating: 8
   category: accessory
-  free weight: dumbbell
-  accomodating resistance:
-    - null
-    - bands
   variation:
-    - name: hammer
     - name: null
-      free weight: straight bar
+      free weight:
+        - dumbbell
+        - straight bar
+        - EZ bar
+      accomodating resistance:
+        - null
+        - bands
+    - name: hammer
+      free weight:
+        - dumbbell
+      accomodating resistance:
+        - null
+        - bands
     - name: pinwheel
+      free weight:
+        - dumbbell
+      accomodating resistance:
+        - null
+        - bands
     - name: preacher
+      free weight:
+        - straight bar
+        - EZ bar
     - name: isolation
+      free weight:
+        - dumbbell
+      accomodating resistance:
+        - null
+        - bands
+    - name: arm blaster
+      free weight:
+        - straight bar
+        - EZ bar
 
 ##########################################
 # Additional Lower
@@ -630,6 +672,7 @@ tricep extensions:
       free weight:
         - straight bar
         - dumbbell
+        - EZ bar
       accomodating resistance:
         - bands
         - null
@@ -645,7 +688,9 @@ skull crushers:
   push: true
   upper: true
   rating: 7
-  free weight: straight bar
+  free weight:
+    - straight bar
+    - EZ bar
   category: accessory
 
 ##########################################
