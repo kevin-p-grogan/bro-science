@@ -302,6 +302,7 @@ row:
         - pronated grip inverted
         - supinated grip inverted
         - neutral grip inverted
+        - weighted high inverted
       rating: 7
       category: secondary
     - name: seal
@@ -317,6 +318,9 @@ row:
       rating: 6
       category: assistance
       free weight: straight bar
+    - name: high inverted
+      rating: 8
+      category: assistance
     - rating: 7
       category: assistance
       free weight: dumbbell
@@ -423,24 +427,7 @@ snatch grip high pull:
     - null
     - box
 
-#curl:
-#  push: false
-#  upper: true
-#  rating: 8
-#  category: accessory
-#  free weight:
-#    - dumbbell
-#    - straight bar
-#    - EZ bar
-#  accomodating resistance:
-#    - null
-#    - bands
-#  variation:
-#    - name: hammer
-#    - name: pinwheel
-#    - name: preacher
-#    - name: isolation
-#    - name: arm blaster
+
 curl:
   push: false
   upper: true
