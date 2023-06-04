@@ -104,6 +104,22 @@ squat:
       other equipment:
         - null
         - box
+    - name: front
+      rating: 7
+      category: assistance
+      free weight: straight bar
+      accomodating resistance:
+        - null
+        - chains
+      other equipment: linebacker attachment
+    - name: hack
+      rating: 7
+      category: assistance
+      free weight: straight bar
+      accomodating resistance:
+        - null
+        - chains
+      other equipment: linebacker attachment
     - name: belt
       rating: 8
       category: assistance
@@ -169,10 +185,14 @@ deadlift:
       free weight: straight bar
       other equipment: box
     # assistance deadlifts
-    - name: landmine
-      rating: 6
+    - rating: 6
       category: assistance
       free weight: straight bar
+      accomodating resistance:
+        - null
+        - bands
+        - chains
+      other equipment: linebacker attachment
     - name: Romanian
       rating: 6
       category: assistance
@@ -245,16 +265,27 @@ press:
       other equipment:
         - null
         - fat gripz
+    - name: incline
+      rating: 7
+      category: assistance
+      free weight: straight bar
+      other equipment: linebacker attachment
     - name: JM
       rating: 5
       category: assistance
       free weight: straight bar
+      accomodating resistance: bands
+    - name:
+        - viking
+        - jammer
+      rating: 7
+      category: accessory
+      free weight: straight bar
       accomodating resistance:
         - null
         - bands
-      other equipment:
-        - null
-        - bands
+        - chains
+      other equipment: linebacker attachment
     # accessory
     - name: Bradford
       rating: 6
@@ -312,7 +343,10 @@ row:
         - football bar
         - straight bar
         - buffalo bar
-      other equipment:
+    - rating: 7
+      category: secondary
+      free weight: straight bar
+      other equipment: linebacker attachment
     # assistance variations
     - name: landmine
       rating: 6
@@ -350,6 +384,7 @@ hip thrust:
       accomodating resistance:
         - null
         - bands
+        - chains
 
 dip:
   push: true
@@ -411,11 +446,15 @@ hang clean:
   push: false
   upper: true
   rating: 7
-  category: primary
-  free weight: straight bar
-  other equipment:
-    - null
-    - box
+  variation:
+    - category: primary
+      free weight: straight bar
+      other equipment:
+        - null
+        - box
+    - category: secondary
+      free weight: straight bar
+      other equipment: linebacker attachment
 
 snatch grip high pull:
   push: false
@@ -475,19 +514,24 @@ curl:
 good mornings:
   push: false
   upper: false
-  rating: 3
   category: assistance
-  free weight:
-    - safety squat bar
-    - cambered bar
-    - buffalo bar
   accomodating resistance:
     - bands
     - chains
     - null
-  other equipment:
-    - null
-    - box
+  variation:
+    - rating: 3
+      free weight:
+        - safety squat bar
+        - cambered bar
+        - buffalo bar
+        - straight bar
+      other equipment:
+        - null
+        - box
+    - rating: 6
+      free weight: straight bar
+      other equipment: linebacker attachment
 
 back raises:
   push: false
